@@ -35,8 +35,17 @@ function updateNavOnLogin() {
   $navUserProfile.text(`${currentUser.username}`).show();
 }
 
-function navSubmitClick(evt) {
+function navSubmitClick() {
+  hidePageComponents();
   $storyForm.show();
+  $allStoriesList.show();
 }
 
 $navSubmit.on("click", navSubmitClick);
+
+function navFovoritesClick() {
+  hidePageComponents();
+  putFavoritedStoriesOnPage();
+}
+
+$navFavorites.on("click", navFovoritesClick);

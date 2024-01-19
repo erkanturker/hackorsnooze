@@ -58,6 +58,16 @@ function putStoriesOnPage() {
   $allStoriesList.show();
 }
 
+function putFavoritedStoriesOnPage() {
+  $favoritedStoriesList.empty();
+  currentUser.favorites.forEach((favStory) => {
+    const $favStory = generateStoryMarkup(favStory);
+    $favoritedStoriesList.append($favStory);
+  });
+
+  $favoritedStoriesList.show();
+}
+
 async function postStory(evt) {
   evt.preventDefault();
   const author = $("#author").val();
