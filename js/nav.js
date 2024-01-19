@@ -49,3 +49,10 @@ function navFovoritesClick() {
 }
 
 $navFavorites.on("click", navFovoritesClick);
+
+function navMyStoriesClick() {
+  hidePageComponents();
+  putOwnStoriesOnPage();
+}
+
+$navOwnStories.on("click", navMyStoriesClick);
