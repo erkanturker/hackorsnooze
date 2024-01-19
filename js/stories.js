@@ -20,11 +20,18 @@ async function getAndShowStoriesOnStart() {
  */
 
 function generateStoryMarkup(story) {
-  // console.debug("generateStoryMarkup", story);
-
+  const favorites = currentUser.favorites;
   const hostName = story.getHostName();
+
   return $(`
       <li id="${story.storyId}">
+      <span class="start">
+          <i class="${
+            favorites.some((fav) => fav.storyId === story.storyId)
+              ? "fas fa-star"
+              : "far fa-star"
+          }"></i>
+      </span>
         <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
         </a>
