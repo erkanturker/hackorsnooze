@@ -71,21 +71,33 @@ class StoryList {
    */
 
   async addStory(user, { author, title, url }) {
-    const response = await axios({
-      url: `${BASE_URL}/stories`,
-      method: "POST",
-      data: { token: user.loginToken, story: { author, title, url } },
-    });
-
-    return new Story(response.data.story);
+    try {
+      const response = await axios({
+        url: `${BASE_URL}/stories`,
+        method: "POST",
+        data: { token: user.loginToken, story: { author, title, url } },
+      });
+      user.ownStories.push(new Story(response.data.story));
+    } catch (error) {
+      console.error(`Error adding story`);
+    }
   }
 
   async removeStory(user, storyId) {
-    await axios({
-      url: `${BASE_URL}/stories/${storyId}`,
-      method: "DELETE",
-      data: { token: user.loginToken },
-    });
+    debugger;
+    try {
+      await axios({
+        url: `${BASE_URL}/stories/${storyId}`,
+        method: "DELETE",
+        data: { token: user.loginToken },
+      });
+      user.ownStories = user.ownStories.filter(
+        (story) => story.storyId !== storyId
+      );
+    } catch (error) {
+      console.error(`Error removing story with ID ${storyId}:`, error);
+      throw error;
+    }
   }
 }
 

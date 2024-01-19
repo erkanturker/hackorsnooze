@@ -12,6 +12,11 @@ async function getAndShowStoriesOnStart() {
   putStoriesOnPage();
 }
 
+async function getAndShowOwnStories() {
+  storyList = await StoryList.getStories();
+  putOwnStoriesOnPage(currentUser);
+}
+
 /**
  * A render method to render HTML for an individual Story instance
  * - story: an instance of Story
@@ -104,5 +109,7 @@ $storyForm.on("submit", postStory);
 $storiesContainer.on("click", ".icons>.itrash", async function () {
   const $trashIcon = $(this);
   const id = $trashIcon.closest("li").attr("id");
-  storyList.removeStory(currentUser, id);
+  await storyList.removeStory(currentUser, id);
+  //await getAndShowOwnStories();
+  putOwnStoriesOnPage();
 });
