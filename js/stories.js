@@ -50,3 +50,25 @@ function putStoriesOnPage() {
 
   $allStoriesList.show();
 }
+
+async function postStory(evt) {
+  evt.preventDefault();
+  const author = $("#author").val();
+  const title = $("#title").val();
+  const url = $("#url").val();
+
+  await storyList.addStory(currentUser, { author, title, url });
+
+  await clearStoryFormAndHide();
+}
+
+async function clearStoryFormAndHide() {
+  $("#author").val("");
+  $("#title").val("");
+  $("#url").val("");
+
+  $storyForm.hide();
+  await getAndShowStoriesOnStart();
+}
+
+$storyForm.on("submit", postStory);
