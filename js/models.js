@@ -80,17 +80,17 @@ class StoryList {
     return new Story(response.data.story);
   }
 
-  async addFavStory(user, story) {
+  async addFavStory(user, id) {
     await axios({
-      url: `${BASE_URL}/users/${user.username}/favorites/${story.storyId}`,
+      url: `${BASE_URL}/users/${user.username}/favorites/${id}`,
       method: "POST",
       data: { token: user.loginToken },
     });
   }
 
-  async removeFavStory(user, story) {
+  async removeFavStory(user, id) {
     await axios({
-      url: `${BASE_URL}/users/${user.username}/favorites/${story.storyId}`,
+      url: `${BASE_URL}/users/${user.username}/favorites/${id}`,
       method: "DELETE",
       data: { token: user.loginToken },
     });

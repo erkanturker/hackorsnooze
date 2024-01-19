@@ -79,3 +79,16 @@ async function clearStoryFormAndHide() {
 }
 
 $storyForm.on("submit", postStory);
+
+$allStoriesList.on("click", ".start>i", function () {
+  const $starIcon = $(this);
+  const id = $starIcon.closest("li").attr("id");
+
+  if ($starIcon.hasClass("far fa-star")) {
+    storyList.addFavStory(currentUser, id);
+  } else {
+    storyList.removeFavStory(currentUser, id);
+  }
+
+  $starIcon.toggleClass("far fa-star fas fa-star");
+});
