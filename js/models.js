@@ -79,22 +79,6 @@ class StoryList {
 
     return new Story(response.data.story);
   }
-
-  async addFavStory(user, id) {
-    await axios({
-      url: `${BASE_URL}/users/${user.username}/favorites/${id}`,
-      method: "POST",
-      data: { token: user.loginToken },
-    });
-  }
-
-  async removeFavStory(user, id) {
-    await axios({
-      url: `${BASE_URL}/users/${user.username}/favorites/${id}`,
-      method: "DELETE",
-      data: { token: user.loginToken },
-    });
-  }
 }
 
 /******************************************************************************
@@ -206,5 +190,21 @@ class User {
       console.error("loginViaStoredCredentials failed", err);
       return null;
     }
+  }
+
+  static async addFavStory(user, storyId) {
+    await axios({
+      url: `${BASE_URL}/users/${user.username}/favorites/${storyId}`,
+      method: "POST",
+      data: { token: user.loginToken },
+    });
+  }
+
+  static async removeFavStory(user, storyId) {
+    await axios({
+      url: `${BASE_URL}/users/${user.username}/favorites/${storyId}`,
+      method: "DELETE",
+      data: { token: user.loginToken },
+    });
   }
 }

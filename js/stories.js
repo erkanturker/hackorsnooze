@@ -79,22 +79,3 @@ async function clearStoryFormAndHide() {
 }
 
 $storyForm.on("submit", postStory);
-
-/**
- * Event handler for clicking on the star icon inside $allStoriesList.
- * Adds or removes the story from favorites based on the star icon state.
- * Toggles the star icon class between "far fa-star" and "fas fa-star".
- */
-
-$allStoriesList.on("click", ".start>i", function () {
-  const $starIcon = $(this);
-  const id = $starIcon.closest("li").attr("id");
-
-  if ($starIcon.hasClass("far fa-star")) {
-    storyList.addFavStory(currentUser, id);
-  } else {
-    storyList.removeFavStory(currentUser, id);
-  }
-
-  $starIcon.toggleClass("far fa-star fas fa-star");
-});
