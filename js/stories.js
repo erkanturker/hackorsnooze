@@ -19,17 +19,18 @@ async function getAndShowStoriesOnStart() {
  * Returns the markup for the story.
  */
 
-function generateStoryMarkup(story) {
+function generateStoryMarkup(story, ownStory = false) {
   const favorites = currentUser.favorites;
   const hostName = story.getHostName();
 
   return $(`
       <li id="${story.storyId}">
-      <span class="start">
+      <span class="icons">
+      ${ownStory ? `<i class="fas fa-trash-alt itrash"></i>` : ""}
           <i class="${
             favorites.some((fav) => fav.storyId === story.storyId)
-              ? "fas fa-star"
-              : "far fa-star"
+              ? "fas fa-star istar"
+              : "far fa-star istar"
           }"></i>
       </span>
         <a href="${story.url}" target="a_blank" class="story-link">
@@ -71,7 +72,7 @@ function putFavoritedStoriesOnPage() {
 function putOwnStoriesOnPage() {
   $ownStoriesList.empty();
   currentUser.ownStories.forEach((ownStory) => {
-    const $ownStory = generateStoryMarkup(ownStory);
+    const $ownStory = generateStoryMarkup(ownStory, true);
     $ownStoriesList.append($ownStory);
   });
 
@@ -99,3 +100,9 @@ async function clearStoryFormAndHide() {
 }
 
 $storyForm.on("submit", postStory);
+
+$storiesContainer.on("click", ".icons>.itrash", async function () {
+  const $trashIcon = $(this);
+  const id = $trashIcon.closest("li").attr("id");
+  storyList.removeStory(currentUser, id);
+});

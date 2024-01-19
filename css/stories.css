@@ -40,3 +40,11 @@
 li > span:hover {
   cursor: pointer;
 }
+
+span > i.itrash:hover {
+  color: red;
+}
+
+#own-stories > li {
+  list-style: none;
+}

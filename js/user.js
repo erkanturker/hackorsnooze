@@ -121,7 +121,7 @@ function updateUIOnUserLogin() {
  * Toggles the star icon class between "far fa-star" and "fas fa-star".
  */
 
-$allStoriesList.on("click", ".start>i", async function () {
+$storiesContainer.on("click", ".icons>.istar", async function () {
   const $starIcon = $(this);
   const id = $starIcon.closest("li").attr("id");
 

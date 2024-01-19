@@ -3,6 +3,7 @@
 // So we don't have to keep re-finding things on page, find DOM elements once:
 
 const $body = $("body");
+const $storiesContainer = $(".stories-container");
 
 const $storiesLoadingMsg = $("#stories-loading-msg");
 const $allStoriesList = $("#all-stories-list");
