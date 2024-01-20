@@ -3,6 +3,12 @@
 body {
   font-family: Arimo, sans-serif;
   margin: 8px 7.5vw;
+  height: 100vh;
+  background-image: radial-gradient(
+    circle,
+    rgb(238, 174, 202) 0%,
+    rgb(148, 187, 233) 100%
+  );
 }
 
 h1 {
@@ -29,7 +35,6 @@ a:hover {
   text-decoration: underline;
 }
 
-
 /* Site layout */
 
 /* This is the basic box that the main part of the page goes into */
@@ -40,10 +45,14 @@ a:hover {
   background-color: #f6f6ef;
 }
 
+.stories-container {
+  height: calc(100vh - 100px);
+  overflow: scroll;
+}
+
 .hidden {
   display: none;
 }
-
 
 /* Forms */
 
@@ -105,7 +114,6 @@ form > hr {
 .login-input label {
   width: 70px;
 }
-
 
 /* responsive queries for tightening things up for mobile. */
 

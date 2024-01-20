@@ -12,3 +12,14 @@
 .account-forms-container {
   padding-left: 20px;
 }
+
+/* User profile */
+
+.user-profile-box {
+  padding: 10px 20px 20px;
+  font-size: 0.9rem;
+}
+
+.user-profile-box > * {
+  margin: 10px 0;
+}

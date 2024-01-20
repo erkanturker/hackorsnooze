@@ -8,6 +8,14 @@
   color: gray;
   font-size: 0.8rem;
   margin: 10px 0;
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 10px;
+}
+
+#favorited-stories,
+#my-stories {
+  list-style: none;
+  padding-left: 20px;
 }
 
 #stories-loading-msg {
@@ -31,12 +39,21 @@
 
 .story-author {
   margin-left: 2em;
+  font-size: 0.85rem;
+  color: green;
+  padding: 6px 0;
 }
 
 .story-user {
   display: block;
+  margin-left: 2em;
+  font-size: 0.85rem;
+  color: orange;
 }
-
+li > span {
+  font-size: 0.75rem;
+  margin: 0 5px;
+}
 li > span:hover {
   cursor: pointer;
 }
