@@ -111,7 +111,7 @@ async function clearStoryFormAndHide() {
   $("#title").val("");
   $("#url").val("");
 
-  $storyForm.hide();
+  $storyForm.hide(400);
   await getAndShowStoriesOnStart();
 }
 
