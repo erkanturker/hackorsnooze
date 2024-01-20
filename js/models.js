@@ -77,6 +77,7 @@ class StoryList {
         method: "POST",
         data: { token: user.loginToken, story: { author, title, url } },
       });
+      this.stories.unshift(new Story(response.data.story));
       user.ownStories.push(new Story(response.data.story));
     } catch (error) {
       console.error(`Error adding story`);

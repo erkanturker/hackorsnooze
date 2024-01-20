@@ -102,7 +102,7 @@ async function postStory(evt) {
   const url = $("#url").val();
 
   await storyList.addStory(currentUser, { author, title, url });
-
+  putStoriesOnPage();
   await clearStoryFormAndHide();
 }
 
@@ -112,7 +112,6 @@ async function clearStoryFormAndHide() {
   $("#url").val("");
 
   $storyForm.hide(400);
-  await getAndShowStoriesOnStart();
 }
 
 $storyForm.on("submit", postStory);
