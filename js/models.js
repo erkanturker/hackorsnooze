@@ -213,18 +213,34 @@ class User {
   }
 
   static async addFavStory(user, storyId) {
-    await axios({
-      url: `${BASE_URL}/users/${user.username}/favorites/${storyId}`,
-      method: "POST",
-      data: { token: user.loginToken },
-    });
+    try {
+      const response = await axios({
+        url: `${BASE_URL}/users/${user.username}/favorites/${storyId}`,
+        method: "POST",
+        data: { token: user.loginToken },
+      });
+      user.favorites = response.data.user.favorites.map((s) => new Story(s));
+    } catch (error) {
+      console.error(
+        `The story that has ${storyId} was not added to the favorites`,
+        error
+      );
+    }
   }
 
   static async removeFavStory(user, storyId) {
-    await axios({
-      url: `${BASE_URL}/users/${user.username}/favorites/${storyId}`,
-      method: "DELETE",
-      data: { token: user.loginToken },
-    });
+    try {
+      const response = await axios({
+        url: `${BASE_URL}/users/${user.username}/favorites/${storyId}`,
+        method: "DELETE",
+        data: { token: user.loginToken },
+      });
+      user.favorites = response.data.user.favorites.map((s) => new Story(s));
+    } catch (error) {
+      console.error(
+        `The story that has ${storyId} was not deleted to the favorites`,
+        error
+      );
+    }
   }
 }

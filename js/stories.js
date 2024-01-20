@@ -12,11 +12,6 @@ async function getAndShowStoriesOnStart() {
   putStoriesOnPage();
 }
 
-async function getAndShowOwnStories() {
-  storyList = await StoryList.getStories();
-  putOwnStoriesOnPage(currentUser);
-}
-
 /**
  * A render method to render HTML for an individual Story instance
  * - story: an instance of Story
@@ -65,21 +60,37 @@ function putStoriesOnPage() {
 }
 
 function putFavoritedStoriesOnPage() {
+  const favorites = currentUser.favorites;
+
   $favoritedStoriesList.empty();
-  currentUser.favorites.forEach((favStory) => {
-    const $favStory = generateStoryMarkup(favStory);
-    $favoritedStoriesList.append($favStory);
-  });
+
+  if (favorites.length === 0) {
+    const $alertNoFavs = $("<h5>").text("No favorites added!");
+    $favoritedStoriesList.append($alertNoFavs);
+  } else {
+    favorites.forEach((favStory) => {
+      const $favStory = generateStoryMarkup(favStory);
+      $favoritedStoriesList.append($favStory);
+    });
+  }
 
   $favoritedStoriesList.show();
 }
 
 function putOwnStoriesOnPage() {
+  const ownStories = currentUser.ownStories;
+
   $ownStoriesList.empty();
-  currentUser.ownStories.forEach((ownStory) => {
-    const $ownStory = generateStoryMarkup(ownStory, true);
-    $ownStoriesList.append($ownStory);
-  });
+
+  if (ownStories === 0) {
+    const alerNoOwnStories = $("<h5>").text("No stories added by user yet!");
+    $ownStoriesList.append(alerNoOwnStories);
+  } else {
+    ownStories.forEach((ownStory) => {
+      const $ownStory = generateStoryMarkup(ownStory, true);
+      $ownStoriesList.append($ownStory);
+    });
+  }
 
   $ownStoriesList.show();
 }
@@ -110,6 +121,24 @@ $storiesContainer.on("click", ".icons>.itrash", async function () {
   const $trashIcon = $(this);
   const id = $trashIcon.closest("li").attr("id");
   await storyList.removeStory(currentUser, id);
-  //await getAndShowOwnStories();
   putOwnStoriesOnPage();
+});
+
+/**
+ * Event handler for clicking on the star icon inside $allStoriesList.
+ * Adds or removes the story from favorites based on the star icon state.
+ * Toggles the star icon class between "far fa-star" and "fas fa-star".
+ */
+
+$storiesContainer.on("click", ".icons>.istar", async function () {
+  const $starIcon = $(this);
+  const id = $starIcon.closest("li").attr("id");
+
+  if ($starIcon.hasClass("far fa-star")) {
+    await User.addFavStory(currentUser, id);
+  } else {
+    await User.removeFavStory(currentUser, id);
+  }
+
+  $starIcon.toggleClass("far fa-star fas fa-star");
 });
