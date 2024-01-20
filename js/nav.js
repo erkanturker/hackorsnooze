@@ -31,6 +31,7 @@ function updateNavOnLogin() {
   console.debug("updateNavOnLogin");
   $(".main-nav-links").show();
   $navLogin.hide();
+  $loginForm.hide();
   $navLogOut.show();
   $navMenu.show();
   $navUserProfile.text(`${currentUser.username}`).show();

@@ -85,7 +85,6 @@ class StoryList {
   }
 
   async removeStory(user, storyId) {
-    debugger;
     try {
       await axios({
         url: `${BASE_URL}/stories/${storyId}`,

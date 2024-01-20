@@ -20,7 +20,7 @@ async function getAndShowStoriesOnStart() {
  */
 
 function generateStoryMarkup(story, ownStory = false) {
-  const favorites = currentUser.favorites;
+  const favorites = currentUser?.favorites || [];
   const hostName = story.getHostName();
 
   return $(`
