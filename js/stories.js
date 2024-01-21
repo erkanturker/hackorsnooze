@@ -81,8 +81,8 @@ function putOwnStoriesOnPage() {
   const ownStories = currentUser.ownStories;
 
   $ownStoriesList.empty();
-
-  if (ownStories === 0) {
+  debugger;
+  if (!ownStories || ownStories.length === 0) {
     const alerNoOwnStories = $("<h5>").text("No stories added by user yet!");
     $ownStoriesList.append(alerNoOwnStories);
   } else {
