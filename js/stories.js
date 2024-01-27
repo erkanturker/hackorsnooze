@@ -25,12 +25,15 @@ function generateStoryMarkup(story, ownStory = false) {
 
   return $(`
       <li id="${story.storyId}">
+  
       <span class="icons">
       ${ownStory ? `<i class="fas fa-trash-alt itrash"></i>` : ""}
           <i class="${
-            favorites.some((fav) => fav.storyId === story.storyId)
-              ? "fas fa-star istar"
-              : "far fa-star istar"
+            currentUser
+              ? favorites.some((fav) => fav.storyId === story.storyId)
+                ? "fas fa-star istar"
+                : "far fa-star istar"
+              : ""
           }"></i>
       </span>
         <a href="${story.url}" target="a_blank" class="story-link">
@@ -81,7 +84,6 @@ function putOwnStoriesOnPage() {
   const ownStories = currentUser.ownStories;
 
   $ownStoriesList.empty();
-  debugger;
   if (!ownStories || ownStories.length === 0) {
     const alerNoOwnStories = $("<h5>").text("No stories added by user yet!");
     $ownStoriesList.append(alerNoOwnStories);
